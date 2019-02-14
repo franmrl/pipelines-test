@@ -3,9 +3,12 @@ jobs:
   include:
   - stage: build docker image
     script:
-    - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
-    - docker build -t telefonicainnovationalpha-health-docker.jfrog.io/franmrl-pipe-test
+    - echo "$DOCKER_PASSWORD" | docker login $DOCKER_REGISTRY --username "$DOCKER_USERNAME" --password-stdin
+    - docker build -t $DOCKER_REGISTRY/franmrl-pipe-test
       .
-    - docker push telefonicainnovationalpha-health-docker.jfrog.io/franmrl-pipe-test
+    - docker push $DOCKER_REGISTRY/franmrl-pipe-test
     - echo "$WHATEVER"
   - stage: deploy
+env:
+  global:
+    - DOCKER_REGISTRY=telefonicainnovationalpha-health-docker.jfrog.io

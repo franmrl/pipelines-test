@@ -7,7 +7,6 @@ jobs:
     - docker build -t $DOCKER_REGISTRY/franmrl-pipe-test
       .
     - docker push $DOCKER_REGISTRY/franmrl-pipe-test
-    - echo "$WHATEVER"
   - stage: deploy
 env:
   global:

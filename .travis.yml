@@ -1,6 +1,13 @@
 language: go
-
 jobs:
   include:
-    - stage: test
-    - stage: deploy
+  - stage: build docker image
+    script:
+      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+      - docker build -t  . telefonicainnovationalpha-health-docker.jfrog.io/franmrl-pipe-test
+      - docker push telefonicainnovationalpha-health-docker.jfrog.io/franmrl-pipe-test
+  - stage: deploy
+env:
+  global:
+  - secure: Ib6D+ocGV6Ti5h6kzD1sDWatxZ1iNGTfDMg9VvGA0TLAvKZ0ZFQkZsPhbOXxw6Wjl8BQTwWdAJkQUY1G4ByWA9x+TQOCwWMeJ9lwPmL6HB+ow/0/GKxKTbifsLpMtxpVDmANSr54seO35IfYdKo/DQ/NGXmcQBkqLKfjezXVqjHU0e6RgbhV7bzELyTjGkU08cROsjRG+mKl8joYNV3HOqMLbQr3O+4o97V0Gv9EfrED45mg5TvxDYC1ttbMxunf94FWrJzWdBrY8RHhYDvQs6pvW9hqB1w4F0/ALuee4IpxOKwOa4Cv7F+bdm+UB9TSPtRXmUAbxRalpJfBg9hXIlLgatVD4Hz4+bAWtV6vN0lUFwGQdyUhbUexSQDuVIOGGceK+jw+n+2OBZjtOR66RmyDePPHYUlsVvFxsvesSoL+xZgigyiwHg0OQglGlA2miBr/WhD5qHQVdHaed0pgwBdvu4cQCQUMlC79HP3jkiJdsg2rPvRM0hUJCZUmaCfr8Oo0pvZl8hlsjSMdNnuUvACrUy4OG4llQCJh7fjaqXO4+PrD9IGJnETzlpZ9Dw+qetcVEcwfKT46BFF7GFmXGoJHuSWaSpQuclhR+p+1o1FR/vfq5QnSBNrRu/SEyhr65oPYN8AqHfld6Yg3/7B2vbpJggZJrv4C0S09xWXX1d4=
+  - secure: dHdnj7/k9TiXZDDUNRGd68Hs0FiBSszXhpixw+gk1rR0PK+jmLBnG3svLW8KtgjC15AicSw4q/4kgWpIvTKXE48bIuBIfkrxHlhwtVFbJfmzGm3Jl+beOgiO6YIxEwEs+q0VSDd4mwYyFtavcQ+uVizBm9icx/8nKgpAg1tuuJFmfIw5kZXyDtfg7aF3Gp4pBNb/mt1ZEPBlhBJyKkDWgx60bgQNNbjy6u/Kp7OGjn+mpJAT4ZHD8TY2oZUSYOVsLTqD5kBzOgkw/S0NfyYUOZHJp60ds8Y1XB///tj1Dh/Kx8SLRkF5uEcluXbVHzzF03pzzmPEvIt42Gk2CVItfWsIpAHFDfemEOqb5r2pQbjsQfvkP8PVmRptreRve0YT3bqy0HvW3UbUrpZMo2aKDczrHWYQaX23IC8S4EKz7FTYda9J2BGTgHpFax1PAEtnF9keu7FRD94QKMCJuocbXCmWOTpgYMazDCtGJNHiRq5DA9mOnRMe7fio6+57mawGAF2wWEO9sWils2BxifrMbN7cY7Si5aJe9HPcoHZq3TJ1MIaYLpEsr3QYDb70YKIB0KrBcMnk24dve8sjvVyZaw+7z8neaicq4QeyEk6DZ890ZiceACmCuFIIY5AHDjCP8AGevWyXtNGPZXrJnvYgoBtJnzbm1SZxVJ3l/7jBIOk=

@@ -1,22 +1,27 @@
 pipeline {
   agent any
   stages {
-    stage('Checkout Code') {
+    stage('Deploy to Staging') {
       steps {
         sh 'true'
       }
     }
-    stage('Build') {
+    stage('Installation Tests') {
       steps {
         sh 'true'
       }
     }
-    stage('Test') {
+    stage('Deploy to G/B') {
       steps {
         sh 'true'
       }
     }
-    stage('Publish') {
+    stage('Validate') {
+      steps {
+        sh 'true'
+      }
+    }
+    stage('Redirect load') {
       steps {
         sh 'true'
       }
